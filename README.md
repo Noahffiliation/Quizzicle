@@ -2,7 +2,12 @@
 The problem we are trying solve with our Domain Specific Language (DSL) is a quick method to generate study tools for a typical class exam. Most exams involve memorization of terms and their definitions. Thus, our DSL will take a configurable text file with `term:definition` pairs and convert it into multiple study tools including flash cards and practice quizzes. One of our practice quizzes will be a matching quiz where the terms and definitions will be randomized.
 
 ## Usage
-WIP
+Create a text file containing the necessary options according to the examples and grammar.
+
+Make sure the FileInputStream object uses that text file.
+
+Output will be an HTML page with the necessary study tools.
+
 ## Grammar
 ```ANTLR
 grammar Quizzicle;
