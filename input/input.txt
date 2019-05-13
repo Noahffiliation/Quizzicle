@@ -1,0 +1,25 @@
+config {
+    mode: student;
+    include_answer_key: true;
+}
+
+terms {
+    apple: a red fruit;
+    orange: an orange fruit;
+    banana: a yellow fruit;
+    kiwi: a green, exotic fruit;
+    watermelon: a big, green, and round melon;
+    grape: a purple fruit;
+    pear: a plump fruit;
+    blueberry: a blue fruit;
+    strawberry: a small, red fruit;
+    asparagus: not a fruit;
+}
+
+flash_cards {
+    apple, orange, banana, kiwi, watermelon, grape, pear, asparagus;
+}
+
+matching {
+    apple, orange, banana, asparagus, blueberry, strawberry;
+}

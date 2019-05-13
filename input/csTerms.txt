@@ -1,0 +1,24 @@
+config {
+    mode: student;
+    include_answer_key: true;
+}
+
+terms {
+    Array: An array is similar data saved on a computer system in a sequential form;
+    Boolean: An expression, the value of which is either true or false;
+    Class: A group of objects having same operations and attributes is defined as a class;
+    Hardware: Hardware is a set of physical objects such as monitor, keyboard, mouse, and so on;
+    Internet: Internet is a network that accommodates several computers to facilitate exchange and transfer of data;
+    Process: A series of commands that changes data values;
+    Algorithm: An unambiguous specification of how to solve a class of problems;
+    Bug: A bug is a programming error that causes unexpected glitches or problems for the end user;
+    CPU: CPU stands for the Central Processing Unit, which is the processing chip and brains of a computer;
+}
+
+flash_cards {
+    Array, Boolean, Class, Hardware, Internet, Process, Algorithm, Bug, CPU;
+}
+
+matching {
+    Array, Boolean, Class, Hardware, Internet, Process, Algorithm, Bug, CPU;
+}
