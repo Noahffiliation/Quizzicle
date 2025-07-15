@@ -4,3 +4,4 @@ out/
 antlr-runtime-4.7.2.jar
 output.html
 *.iml
+.vscode/
