@@ -1,6 +1,6 @@
 <meta charset="utf-8" lang="en">
 
-                **Quizzicle**
+**Quizzicle**
 
 Student Info
 =============
@@ -10,108 +10,115 @@ Team members: Matt Hapner, Noah Lindsey, Chris Maxel
 
 Domain - Quizzicle™
 ================
-    The problem we are trying solve with our Domain Specific Language (DSL) is a quick method to generate study tools for a typical class exam. Most exams involve memorization of terms and their definitions. Thus, our DSL will take a configurable text file with term:definition pairs and convert it into multiple study tools including flash cards and practice quizzes. One of our practice quizzes will be a matching quiz where the terms and definitions will be randomized.
+The problem we are trying solve with our Domain Specific Language (DSL) is a quick method to generate study tools for a
+typical class exam. Most exams involve memorization of terms and their definitions. Thus, our DSL will take a
+configurable text file with term:definition pairs and convert it into multiple study tools including flash cards and
+practice quizzes. One of our practice quizzes will be a matching quiz where the terms and definitions will be
+randomized.
 
 Examples
 ================
-    ## Input:
-        ````````````````
-        config {
-            mode: student;
-            include_answer_key: true;
-        }
+## Input:
+````````````````
+config {
+mode: student;
+include_answer_key: true;
+}
 
-        terms {
-            apple: a red fruit;
-            orange: an orange fruit;
-            banana: a yellow fruit;
-            kiwi: a green, exotic fruit;
-        }
+terms {
+apple: a red fruit;
+orange: an orange fruit;
+banana: a yellow fruit;
+kiwi: a green, exotic fruit;
+}
 
-        flash_cards {
-            apple, orange, banana;
-        }
+flash_cards {
+apple, orange, banana;
+}
 
-        matching {
-            orange, banana, kiwi;
-        }
-        ````````````````
+matching {
+orange, banana, kiwi;
+}
+````````````````
 
-    ## Output:
-        ### Flashcards
-            | apple       | orange          | banana         |
-            | ----------- |-----------------|----------------|
-            | a red fruit | an orange fruit | a yellow fruit |
+## Output:
+### Flashcards
+| apple | orange | banana |
+| ----------- |-----------------|----------------|
+| a red fruit | an orange fruit | a yellow fruit |
 
-        ### Matching
-            ~~~~~~~~
-            _____ kiwi          A. a yellow fruit
-            _____ banana        B. an orange fruit
-            _____ orange        C. a green, exotic fruit
-            ~~~~~~~~
+### Matching
+~~~~~~~~
+_____ kiwi A. a yellow fruit
+_____ banana B. an orange fruit
+_____ orange C. a green, exotic fruit
+~~~~~~~~
 
-        ### Answer Key
-            ~~~~~~~~
-            __C__ kiwi
-            __A__ banana
-            __B__ orange
-            ~~~~~~~~
+### Answer Key
+~~~~~~~~
+__C__ kiwi
+__A__ banana
+__B__ orange
+~~~~~~~~
 
 Functionality
 ================
-    The output will be determined based upon the _config_ section of the config file as well as seeing which sections (e.g. flashcard, matching, etc.) exist. The _config_ section will allow the user to set flags based upon their desired output.
+The output will be determined based upon the _config_ section of the config file as well as seeing which sections (e.g.
+flashcard, matching, etc.) exist. The _config_ section will allow the user to set flags based upon their desired output.
 
 Grammar
 ===============
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ANTLR
-    grammar Quizzicle;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ANTLR
+grammar Quizzicle;
 
-    file        : config? terms quizzes EOF;
-    config      : 'config' '{' settings '}';
-    settings    : MODE
-                    | ANSWER_KEY
-                    | MODE ANSWER_KEY
-                    | ANSWER_KEY MODE;
+file : config? terms quizzes EOF;
+config : 'config' '{' settings '}';
+settings : MODE
+| ANSWER_KEY
+| MODE ANSWER_KEY
+| ANSWER_KEY MODE;
 
-    terms       : 'terms' '{' items '}';
-    items       : item+;
-    item        : key_phrase ':' definition ';';
+terms : 'terms' '{' items '}';
+items : item+;
+item : key_phrase ':' definition ';';
 
-    quizzes     : quiz+;
-    quiz        : TYPE '{' key_phrases ';' '}';
-    key_phrases : key_phrase
-                    | key_phrase ',' key_phrases;
+quizzes : quiz+;
+quiz : TYPE '{' key_phrases ';' '}';
+key_phrases : key_phrase
+| key_phrase ',' key_phrases;
 
-    key_phrase : CHARACTERS+;
-    definition : CHARACTERS+;
+key_phrase : CHARACTERS+;
+definition : CHARACTERS+;
 
 
-    MODE       : 'mode:' SPACES ('teacher' | 'student') ';';
-    TYPE       : ('flash_cards' | 'matching');
-    ANSWER_KEY : 'include_answer_key:' SPACES ('true' | 'false') ';';
-    CHARACTERS : [A-Za-z0-9]+;
-    WS         : [\n\t\r ]+ -> skip;
-    SPACES     : [ ]*;
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+MODE : 'mode:' SPACES ('teacher' | 'student') ';';
+TYPE : ('flash_cards' | 'matching');
+ANSWER_KEY : 'include_answer_key:' SPACES ('true' | 'false') ';';
+CHARACTERS : [A-Za-z0-9]+;
+WS : [\n\t\r ]+ -> skip;
+SPACES : [ ]*;
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 Comparison
 ===============
-    Our tool, Quizzicle allows for more efficient and faster studying.  It is faster than writing definitions out by hand.  Compared to Quizlet, it is better in the sense of ease of use.  However, Quizlet beats us out in terms of user interface.
+Our tool, Quizzicle allows for more efficient and faster studying. It is faster than writing definitions out by hand.
+Compared to Quizlet, it is better in the sense of ease of use. However, Quizlet beats us out in terms of user interface.
 
 
 
 Translation
 ===============
-    Output
-    ---------------
-    ![Flashcards](images/flashcards.JPG)
-    ![Matching](images/matching.JPG)
+Output
+---------------
+![Flashcards](images/flashcards.JPG)
+![Matching](images/matching.JPG)
 
 
 Responsibilities/Contributions
 ================================
-    We pair(with 3 people)-programmed the whole Domain Specific Language.  All of us contributed equally in terms of effort, time spent, and thought put into Quizzicle.
+We pair(with 3 people)-programmed the whole Domain Specific Language. All of us contributed equally in terms of effort,
+time spent, and thought put into Quizzicle.
 
 
 <!--
@@ -120,4 +127,13 @@ Leave the following, as this will format your text above to look nice.
 
 -->
 
-<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible");</script>
+<!-- Markdeep: -->
+<style class="fallback">
+    body {
+        visibility: hidden;
+        white-space: pre;
+        font-family: monospace
+    }
+</style>
+<script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script>
+<script>globalThis.alreadyProcessedMarkdeep || (document.body.style.visibility = "visible");</script>
