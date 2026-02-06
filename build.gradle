@@ -5,31 +5,11 @@ plugins {
     id "org.sonarqube" version "7.1.0.6387"
 }
 
-sonar {
-  properties {
-    property "sonar.projectKey", "Noahffiliation_Quizzicle"
-    property "sonar.organization", "noahffiliation"
-  }
-}
-
 group = 'com.quizzicle'
 version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
-}
-
-sourceSets {
-    main {
-        java {
-            srcDirs = ['.']
-            include 'src/**/*.java'
-        }
-        antlr {
-            srcDirs = ['.']
-            include 'Quizzicle.g4'
-        }
-    }
 }
 
 dependencies {
@@ -39,32 +19,17 @@ dependencies {
 
 generateGrammarSource {
     maxHeapSize = "64m"
-    arguments += ["-visitor", "-package", "src"]
-    outputDirectory = file("src")
+    // This creates the /com/quizzicle/ folder structure inside the build directory
+    arguments += ["-visitor", "-package", "com.quizzicle"]
 }
 
 application {
-    mainClass = 'src.Test'
+    mainClass = 'com.quizzicle.Test'
 }
 
-// Prevent ANTLR from being packaged in the jar
-configurations {
-    compileClasspath.extendsFrom antlr
-}
-
-// Ensure ANTLR runs before compilation
-compileJava.dependsOn generateGrammarSource
-
-// Clean generated files
-clean {
-    delete fileTree('src') {
-        include 'QuizzicleLexer.java'
-        include 'QuizzicleParser.java'
-        include 'QuizzicleBaseListener.java'
-        include 'QuizzicleListener.java'
-        include 'QuizzicleBaseVisitor.java'
-        include 'QuizzicleVisitor.java'
-        include 'Quizzicle.tokens'
-        include 'QuizzicleLexer.tokens'
+sonar {
+    properties {
+        property "sonar.projectKey", "Noahffiliation_Quizzicle"
+        property "sonar.organization", "noahffiliation"
     }
 }
