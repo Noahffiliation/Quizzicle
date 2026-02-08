@@ -9,6 +9,9 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -98,6 +101,39 @@ public class QuizzicleVizzTest {
         com.quizzicle.Test.main(new String[0]);
 
         assertTrue(Files.exists(OUTPUT_PATH));
+    }
+
+    @Test
+    void logsWhenOverwritingExistingOutput() throws Exception {
+        Files.writeString(OUTPUT_PATH, "old content");
+        ByteArrayOutputStream stdout = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(stdout, true, StandardCharsets.UTF_8));
+        try {
+            String input =
+                    """
+                            terms {
+                              Term1: Alpha;
+                            }
+                            flash_cards {
+                              Term1;
+                            }
+                            """;
+            CharStream stream = CharStreams.fromString(input);
+            QuizzicleLexer lexer = new QuizzicleLexer(stream);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            QuizzicleParser parser = new QuizzicleParser(tokens);
+            ParseTree tree = parser.file();
+
+            QuizzicleVizz visitor = new QuizzicleVizz();
+            visitor.visit(tree);
+        } finally {
+            System.setOut(originalOut);
+        }
+
+        String outputLog = stdout.toString(StandardCharsets.UTF_8);
+        assertTrue(outputLog.contains("output.html already exists; overwriting."));
+        assertFalse(Files.readString(OUTPUT_PATH).contains("old content"));
     }
 
     private String runVisitor(String input) throws Exception {
