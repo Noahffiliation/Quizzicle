@@ -1,6 +1,5 @@
 package com.quizzicle;
 
-import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.*;
@@ -60,7 +59,6 @@ public class QuizzicleVizz extends QuizzicleBaseVisitor<Void> {
         int j;
         for (int i = 0; i < mTerms.size(); i++) {
             String term = mTerms.get(i);
-            String definition = definitions.get(i);
             j = i + 1;
             answerKeyBuilder.append(term).append(": ").append(dictionary.get(term)).append("<br>");
             matchingBuilder.append("<tr><td><ol><li value=")
@@ -83,9 +81,12 @@ public class QuizzicleVizz extends QuizzicleBaseVisitor<Void> {
         }
 
         try {
-            file.createNewFile();
-            FileWriter writer = new FileWriter(file);
-            writer.write("<!DOCTYPE html>\n" +
+            boolean created = file.createNewFile();
+            if (!created) {
+                System.out.println("output.html already exists; overwriting.");
+            }
+            try (FileWriter writer = new FileWriter(file)) {
+                writer.write("<!DOCTYPE html>\n" +
                     "<html>\n" +
                     "<head>\n" +
                     style + "\n" +
@@ -105,8 +106,8 @@ public class QuizzicleVizz extends QuizzicleBaseVisitor<Void> {
                     "\n" +
                     "</body>\n" +
                     "</html>");
-            writer.flush();
-            writer.close();
+                writer.flush();
+            }
         } catch (IOException e) {
             System.err.println("An error occurred while writing the output file: " + e.getMessage());
         }
