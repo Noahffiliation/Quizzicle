@@ -1,0 +1,20 @@
+config {
+    mode: peoples;
+    include_answer_key: true;
+}
+
+terms {
+    apple: a red fruit;
+    orange: an orange fruit;
+    banana: a yellow fruit;
+    kiwi: a green exotic fruit;
+    bad ; input
+}
+
+flash_cards {
+    apple, orange, banana,;
+}
+
+matching {
+    orange, banana, kiwi        ;
+}

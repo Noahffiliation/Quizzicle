@@ -1,7 +1,4 @@
-package com.quizzicle;
-
 import org.antlr.v4.runtime.tree.ParseTree;
-
 import java.io.*;
 import java.util.*;
 
@@ -65,12 +62,9 @@ public class QuizzicleVizz extends QuizzicleBaseVisitor<Void> {
         }
 
         try {
-            boolean created = file.createNewFile();
-            if (!created) {
-                System.out.println("output.html already exists; overwriting.");
-            }
-            try (FileWriter writer = new FileWriter(file)) {
-                writer.write("<!DOCTYPE html>\n" +
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            writer.write("<!DOCTYPE html>\n" +
                     "<html>\n" +
                     "<head>\n" +
                     style + "\n" +
@@ -90,8 +84,8 @@ public class QuizzicleVizz extends QuizzicleBaseVisitor<Void> {
                     "\n" +
                     "</body>\n" +
                     "</html>");
-                writer.flush();
-            }
+            writer.flush();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

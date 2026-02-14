@@ -25,4 +25,4 @@ TYPE : ('flash_cards' | 'matching');
 ANSWER_KEY : 'include_answer_key:' SPACES ('true' | 'false') ';';
 CHARACTERS : [A-Za-z0-9,]+;
 WS : [\n\t\r ]+ -> skip;
-SPACES : [ ]+;
+SPACES : [ ]*;
